@@ -1,50 +1,60 @@
 /* ═══════════════════════════════════════════════════════════
-   PhytoScan AI — Global Styles
-   Dark Biopunk Futuristic Theme
+   PhytoScan AI — Botanical Nature Theme
+   Organic · Earthy · Lush · Herbal Medicine Inspired
    ═══════════════════════════════════════════════════════════ */
 
-:root {
-  /* Core palette */
-  --bg-void: #020408;
-  --bg-deep: #060d12;
-  --bg-surface: #0a1520;
-  --bg-elevated: #0f1f2e;
-  --bg-glass: rgba(10, 25, 40, 0.65);
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Instrument+Sans:wght@300;400;500;600&family=Caveat:wght@400;500;600&display=swap');
 
-  /* Accent colors — electric teal + bio-green */
-  --accent-primary: #00e5c3;
-  --accent-secondary: #39ff8a;
-  --accent-tertiary: #0af0ff;
-  --accent-warn: #ff6b35;
-  --accent-danger: #ff3d6e;
+:root {
+  /* Core palette — botanical garden */
+  --bg-base: #F1F8E9;
+  --bg-surface: #FFFFFF;
+  --bg-card: #FAFFF5;
+  --bg-muted: #E8F5E9;
+  --bg-deep: #C8E6C9;
+
+  /* Green palette */
+  --green-dark: #1B5E20;
+  --green-primary: #2E7D32;
+  --green-mid: #388E3C;
+  --green-light: #66BB6A;
+  --green-pale: #A5D6A7;
+  --green-wash: #E8F5E9;
+  --green-mint: #F1F8E9;
+
+  /* Earth tones */
+  --earth-brown: #5D4037;
+  --earth-tan: #8D6E63;
+  --earth-sand: #D7CCC8;
+  --earth-cream: #FFF8E1;
+
+  /* Accent */
+  --accent-gold: #F9A825;
+  --accent-amber: #FF8F00;
+  --accent-sage: #558B2F;
 
   /* Text */
-  --text-primary: #e8f4f0;
-  --text-secondary: #7fa8b8;
-  --text-muted: #3d6070;
-  --text-accent: #00e5c3;
+  --text-primary: #1B3A1E;
+  --text-secondary: #4A6741;
+  --text-muted: #7A9E7A;
+  --text-light: #A8C5A0;
+  --text-white: #FAFFF5;
 
   /* Borders */
-  --border-subtle: rgba(0, 229, 195, 0.08);
-  --border-active: rgba(0, 229, 195, 0.35);
-  --border-glow: rgba(0, 229, 195, 0.6);
-
-  /* Gradients */
-  --grad-primary: linear-gradient(135deg, #00e5c3 0%, #0af0ff 50%, #39ff8a 100%);
-  --grad-bg: radial-gradient(ellipse at 20% 20%, rgba(0, 229, 195, 0.06) 0%, transparent 60%),
-             radial-gradient(ellipse at 80% 80%, rgba(57, 255, 138, 0.04) 0%, transparent 60%),
-             radial-gradient(ellipse at 50% 50%, rgba(10, 240, 255, 0.03) 0%, transparent 70%);
-  --grad-card: linear-gradient(135deg, rgba(15, 35, 55, 0.9) 0%, rgba(6, 18, 28, 0.95) 100%);
+  --border-light: rgba(46, 125, 50, 0.12);
+  --border-mid: rgba(46, 125, 50, 0.25);
+  --border-active: rgba(46, 125, 50, 0.5);
 
   /* Shadows */
-  --shadow-glow: 0 0 30px rgba(0, 229, 195, 0.15), 0 0 60px rgba(0, 229, 195, 0.05);
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(0, 229, 195, 0.08) inset;
-  --shadow-active: 0 0 40px rgba(0, 229, 195, 0.25), 0 8px 40px rgba(0, 0, 0, 0.6);
+  --shadow-sm: 0 2px 12px rgba(46, 125, 50, 0.08);
+  --shadow-md: 0 4px 24px rgba(46, 125, 50, 0.12);
+  --shadow-lg: 0 8px 40px rgba(46, 125, 50, 0.15);
+  --shadow-card: 0 2px 20px rgba(27, 62, 30, 0.08), 0 1px 4px rgba(27, 62, 30, 0.04);
 
   /* Typography */
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Instrument Sans', system-ui, sans-serif;
+  --font-handwritten: 'Caveat', cursive;
 
   /* Sizing */
   --radius-sm: 8px;
@@ -73,7 +83,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--bg-void);
+  background-color: var(--bg-base);
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
@@ -81,24 +91,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Animated grid background */
+/* Botanical background pattern */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(0, 229, 195, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 229, 195, 0.025) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: var(--grad-bg);
+    radial-gradient(ellipse at 10% 20%, rgba(165, 214, 167, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%, rgba(102, 187, 106, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(241, 248, 233, 0.5) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -110,86 +111,59 @@ body::after {
 
 /* ─── Scrollbar ───────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-deep); }
-::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 3px; opacity: 0.5; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent-tertiary); }
+::-webkit-scrollbar-track { background: var(--bg-muted); }
+::-webkit-scrollbar-thumb { background: var(--green-pale); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--green-light); }
 
-/* ─── Typography Scale ────────────────────────────────────── */
+/* ─── Typography ──────────────────────────────────────────── */
 h1, h2, h3, h4, h5 {
   font-family: var(--font-display);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 p { line-height: 1.7; }
 
-/* ─── Utility Classes ─────────────────────────────────────── */
-.glass {
-  background: var(--bg-glass);
-  backdrop-filter: blur(20px) saturate(1.5);
-  -webkit-backdrop-filter: blur(20px) saturate(1.5);
-  border: 1px solid var(--border-subtle);
-}
-
-.glow-text {
-  background: var(--grad-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.mono {
-  font-family: var(--font-mono);
-  font-size: 0.85em;
-}
-
 /* ─── Animations ──────────────────────────────────────────── */
-@keyframes pulse-ring {
-  0% { transform: scale(0.95); opacity: 0.8; }
-  50% { transform: scale(1.05); opacity: 0.4; }
-  100% { transform: scale(0.95); opacity: 0.8; }
+@keyframes sway {
+  0%, 100% { transform: rotate(-2deg) translateY(0); }
+  50% { transform: rotate(2deg) translateY(-6px); }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+@keyframes float-leaf {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
+  33% { transform: translateY(-20px) rotate(5deg); opacity: 0.7; }
+  66% { transform: translateY(-10px) rotate(-3deg); opacity: 0.5; }
 }
 
-@keyframes scan-line {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.95); }
 }
 
-@keyframes rotate-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes grow-bar {
+  from { width: 0; }
+  to { width: var(--w); }
 }
 
-@keyframes shimmer {
+@keyframes shimmer-leaf {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
 
-@keyframes data-flow {
-  0% { opacity: 0; transform: translateY(10px); }
-  50% { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-10px); }
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-/* Scan line overlay for loading */
-.scan-overlay::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 229, 195, 0.08) 50%,
-    transparent 100%
-  );
-  background-size: 100% 30%;
-  animation: scan-line 2s linear infinite;
-  pointer-events: none;
-  border-radius: inherit;
-  overflow: hidden;
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes leaf-fall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(100vh) rotate(180deg); opacity: 0; }
 }

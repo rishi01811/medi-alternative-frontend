@@ -6,22 +6,24 @@ import './styles/App.css'
 
 const API_URL = "https://rishi01811-phytoscan-backend.hf.space"
 
-// ─── Particle Background ─────────────────────────────────────────────────────
-function ParticleField() {
+// ─── Falling Leaves Background ───────────────────────────────────────────────
+function LeafField() {
+  const leaves = ['🍃', '🌿', '🍀', '☘️', '🌱']
   return (
-    <div className="particle-field" aria-hidden="true">
-      {Array.from({ length: 25 }).map((_, i) => (
+    <div className="leaf-field" aria-hidden="true">
+      {Array.from({ length: 12 }).map((_, i) => (
         <div
           key={i}
-          className="particle"
+          className="falling-leaf"
           style={{
-            '--delay': `${Math.random() * 8}s`,
-            '--duration': `${6 + Math.random() * 8}s`,
             '--x': `${Math.random() * 100}%`,
-            '--size': `${1 + Math.random() * 3}px`,
-            '--opacity': 0.2 + Math.random() * 0.5,
+            '--duration': `${12 + Math.random() * 16}s`,
+            '--delay': `${Math.random() * 12}s`,
+            '--size': `${14 + Math.random() * 18}px`,
           }}
-        />
+        >
+          {leaves[i % leaves.length]}
+        </div>
       ))}
     </div>
   )
@@ -32,30 +34,13 @@ function Header() {
   return (
     <motion.header
       className="header"
-      initial={{ opacity: 0, y: -30 }}
+      initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+      transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
     >
       <div className="header-inner">
         <div className="logo-group">
-          <div className="logo-icon">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-              <circle cx="14" cy="14" r="12" stroke="url(#g1)" strokeWidth="1.5" />
-              <path d="M14 6 C8 6 6 12 8 16 C10 20 14 22 14 22" stroke="url(#g1)" strokeWidth="2" strokeLinecap="round" />
-              <path d="M14 6 C20 6 22 12 20 16 C18 20 14 22 14 22" stroke="url(#g2)" strokeWidth="2" strokeLinecap="round" />
-              <circle cx="14" cy="14" r="2.5" fill="url(#g1)" />
-              <defs>
-                <linearGradient id="g1" x1="0" y1="0" x2="28" y2="28">
-                  <stop offset="0%" stopColor="#00e5c3" />
-                  <stop offset="100%" stopColor="#0af0ff" />
-                </linearGradient>
-                <linearGradient id="g2" x1="28" y1="0" x2="0" y2="28">
-                  <stop offset="0%" stopColor="#39ff8a" />
-                  <stop offset="100%" stopColor="#00e5c3" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
+          <div className="logo-icon">🌿</div>
           <div>
             <h1 className="logo-name">PhytoScan <span className="logo-ai">AI</span></h1>
             <p className="logo-tagline">Medicinal Plant Intelligence</p>
@@ -67,7 +52,7 @@ function Header() {
             <span className="status-dot" />
             Model Active
           </span>
-          <span className="nav-label mono">MobileNetV2 v2.0</span>
+          <span className="nav-model">MobileNetV2 v2.0</span>
         </nav>
       </div>
     </motion.header>
@@ -81,55 +66,64 @@ function Hero() {
       className="hero"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ delay: 0.2, duration: 1 }}
+      transition={{ delay: 0.15, duration: 0.8 }}
     >
       <motion.div
-        className="hero-badge"
-        initial={{ opacity: 0, scale: 0.8 }}
+        className="hero-eyebrow"
+        initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.4, type: 'spring', stiffness: 200 }}
+        transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
       >
-        <span className="badge-dot" />
-        Deep Learning · Transfer Learning · MobileNetV2
+        🌱 Deep Learning · Transfer Learning · MobileNetV2
       </motion.div>
 
       <motion.h2
         className="hero-title"
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.8 }}
+        transition={{ delay: 0.4, duration: 0.7 }}
       >
         Identify Medicinal Plants
         <br />
-        <span className="glow-text">With AI Precision</span>
+        <em>with AI Precision</em>
       </motion.h2>
 
       <motion.p
         className="hero-desc"
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7, duration: 0.8 }}
+        transition={{ delay: 0.55, duration: 0.7 }}
       >
-        Upload any plant image and get instant identification with detailed medicinal properties,
-        scientific classification, and traditional uses — powered by deep convolutional neural networks.
+        Upload any plant image and get instant identification with detailed medicinal
+        properties, scientific classification, and traditional uses — powered by deep
+        convolutional neural networks.
       </motion.p>
 
       <motion.div
         className="hero-stats"
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.9, duration: 0.8 }}
+        transition={{ delay: 0.7, duration: 0.7 }}
       >
         {[
-          { value: '40+', label: 'Plant Species' },
-          { value: '6500+', label: 'Training Images' },
-          { value: '95%+', label: 'Accuracy' },
-          { value: '<200ms', label: 'Inference' },
-        ].map((stat) => (
-          <div key={stat.label} className="stat-item">
-            <span className="stat-value glow-text">{stat.value}</span>
-            <span className="stat-label">{stat.label}</span>
-          </div>
+          { icon: '🌿', value: '40+', label: 'Plant Species' },
+          { icon: '🖼️', value: '6500+', label: 'Training Images' },
+          { icon: '🎯', value: '95%+', label: 'Accuracy' },
+          { icon: '⚡', value: '<200ms', label: 'Inference' },
+        ].map((stat, i) => (
+          <motion.div
+            key={stat.label}
+            className="stat-pill"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.75 + i * 0.08 }}
+          >
+            <span className="stat-icon">{stat.icon}</span>
+            <div className="stat-content">
+              <span className="stat-value">{stat.value}</span>
+              <span className="stat-label">{stat.label}</span>
+            </div>
+          </motion.div>
         ))}
       </motion.div>
     </motion.section>
@@ -160,57 +154,57 @@ function UploadZone({ onImageSelect, isLoading }) {
   return (
     <motion.div
       className="upload-section"
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 32 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.6, duration: 0.8 }}
+      transition={{ delay: 0.5, duration: 0.7 }}
     >
       <div
         {...getRootProps()}
-        className={`dropzone ${isDragActive ? 'drag-active' : ''} ${preview ? 'has-preview' : ''} ${isLoading ? 'scan-overlay' : ''}`}
+        className={`upload-card ${isDragActive ? 'drag-active' : ''} ${preview ? 'has-preview' : ''}`}
       >
         <input {...getInputProps()} />
 
-        {/* Corner decorations */}
-        <span className="corner tl" /><span className="corner tr" />
-        <span className="corner bl" /><span className="corner br" />
+        {/* Leaf corner decorations */}
+        <span className="leaf-corner tl">🍃</span>
+        <span className="leaf-corner tr">🍃</span>
+        <span className="leaf-corner bl">🍃</span>
+        <span className="leaf-corner br">🍃</span>
 
         {preview ? (
           <div className="preview-container">
             <img src={preview} alt="Plant preview" className="preview-img" />
-            {isLoading && (
+            {isLoading ? (
               <div className="scan-overlay-inner">
-                <div className="scan-bar" />
-                <p className="scanning-text mono">ANALYZING SPECIMEN...</p>
+                <div className="scan-leaf">🔬</div>
+                <p className="scanning-text">Analyzing Specimen...</p>
+                <div className="scan-dots">
+                  <div className="scan-dot" />
+                  <div className="scan-dot" />
+                  <div className="scan-dot" />
+                </div>
               </div>
-            )}
-            {!isLoading && (
+            ) : (
               <div className="preview-overlay">
-                <p>Drop new image to re-analyze</p>
+                🌿 Drop a new image to re-analyze
               </div>
             )}
           </div>
         ) : (
-          <div className="dropzone-content">
+          <div className="upload-content">
             <motion.div
               className="upload-icon-wrap"
               animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
-                <circle cx="26" cy="26" r="24" stroke="url(#ug)" strokeWidth="1" strokeDasharray="4 4" />
-                <circle cx="26" cy="26" r="16" stroke="url(#ug)" strokeWidth="1.5" />
-                <path d="M26 33 L26 19 M19 26 L26 19 L33 26" stroke="url(#ug)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                <defs>
-                  <linearGradient id="ug" x1="0" y1="0" x2="52" y2="52">
-                    <stop offset="0%" stopColor="#00e5c3" />
-                    <stop offset="100%" stopColor="#39ff8a" />
-                  </linearGradient>
-                </defs>
-              </svg>
+              🌿
             </motion.div>
-            <h3 className="dropzone-title">Drop Plant Image Here</h3>
-            <p className="dropzone-sub">or <span className="link-accent">click to browse</span> your files</p>
-            <p className="dropzone-formats mono">JPG · PNG · WEBP · BMP</p>
+            <h3 className="upload-title">Drop a Plant Image Here</h3>
+            <p className="upload-sub">
+              Drag & drop or{' '}
+              <span className="upload-link">click to browse</span>
+              {' '}your files
+            </p>
+            <span className="upload-formats">JPG · PNG · WEBP · BMP</span>
           </div>
         )}
       </div>
@@ -218,66 +212,59 @@ function UploadZone({ onImageSelect, isLoading }) {
   )
 }
 
-// ─── Loading Skeleton ─────────────────────────────────────────────────────────
+// ─── Loading State ────────────────────────────────────────────────────────────
 function LoadingState() {
+  const steps = [
+    { icon: '🖼️', text: 'Preprocessing image...' },
+    { icon: '🧠', text: 'Running neural network...' },
+    { icon: '🔍', text: 'Analyzing plant features...' },
+    { icon: '📋', text: 'Generating results...' },
+  ]
   return (
     <motion.div
       className="loading-state"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
     >
-      <div className="ai-loader">
-        <div className="loader-rings">
-          <div className="ring r1" />
-          <div className="ring r2" />
-          <div className="ring r3" />
-          <div className="loader-center">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M10 2 L12 8 L18 8 L13 12 L15 18 L10 14 L5 18 L7 12 L2 8 L8 8 Z" fill="url(#lg)" />
-              <defs>
-                <linearGradient id="lg" x1="0" y1="0" x2="20" y2="20">
-                  <stop offset="0%" stopColor="#00e5c3" />
-                  <stop offset="100%" stopColor="#39ff8a" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-        </div>
-        <div className="loading-steps">
-          {['Preprocessing image...', 'Running neural network...', 'Analyzing features...', 'Generating results...'].map((step, i) => (
-            <motion.p
-              key={step}
-              className="loading-step mono"
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: [0, 1, 0] }}
-              transition={{ delay: i * 0.6, duration: 1.5, repeat: Infinity, repeatDelay: 1.8 }}
-            >
-              <span className="step-dot" />
-              {step}
-            </motion.p>
-          ))}
-        </div>
+      <div className="loader-leaf">🌿</div>
+      <div>
+        <p className="loader-title">Identifying Plant...</p>
+        <p className="loader-subtitle">Our AI is analyzing your image</p>
+      </div>
+      <div className="loading-steps">
+        {steps.map((step, i) => (
+          <motion.p
+            key={step.text}
+            className="loading-step"
+            initial={{ opacity: 0, x: -12 }}
+            animate={{ opacity: [0, 1, 0.4] }}
+            transition={{ delay: i * 0.7, duration: 1.8, repeat: Infinity, repeatDelay: 1.2 }}
+          >
+            <span className="step-leaf">{step.icon}</span>
+            {step.text}
+          </motion.p>
+        ))}
       </div>
     </motion.div>
   )
 }
 
 // ─── Confidence Bar ───────────────────────────────────────────────────────────
-function ConfidenceBar({ value, color = 'var(--accent-primary)', label, delay = 0 }) {
+function ConfidenceBar({ label, value, rank = 0 }) {
+  const fillClass = rank === 0 ? '' : rank === 1 ? 'secondary' : 'tertiary'
   return (
     <div className="confidence-bar-wrap">
       <div className="bar-header">
-        <span className="bar-label">{label}</span>
-        <span className="bar-value mono">{value.toFixed(1)}%</span>
+        <span className="bar-name">{label}</span>
+        <span className="bar-pct">{value.toFixed(1)}%</span>
       </div>
       <div className="bar-track">
         <motion.div
-          className="bar-fill"
-          style={{ background: color }}
+          className={`bar-fill ${fillClass}`}
           initial={{ width: 0 }}
           animate={{ width: `${value}%` }}
-          transition={{ delay, duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+          transition={{ delay: 0.1 * rank, duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
         />
       </div>
     </div>
@@ -288,35 +275,34 @@ function ConfidenceBar({ value, color = 'var(--accent-primary)', label, delay = 
 function ResultCard({ result }) {
   const { prediction, plant_info, top_3_predictions, inference_time_ms, image_info } = result
 
-  const confidenceColor = prediction.confidence > 85
-    ? '#39ff8a'
-    : prediction.confidence > 60
-    ? '#00e5c3'
-    : '#ff6b35'
+  const confidenceClass =
+    prediction.confidence > 85 ? 'high' :
+    prediction.confidence > 60 ? 'mid' : 'low'
 
   return (
     <motion.div
       className="result-card"
-      initial={{ opacity: 0, y: 50, scale: 0.96 }}
+      initial={{ opacity: 0, y: 40, scale: 0.97 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+      exit={{ opacity: 0, scale: 0.97 }}
+      transition={{ duration: 0.55, ease: [0.34, 1.56, 0.64, 1] }}
     >
       {/* ── Header ── */}
       <div className="result-header">
         <div className="result-title-group">
           <motion.span
-            className="result-tag mono"
+            className="result-tag"
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
           >
-            IDENTIFIED SPECIMEN
+            🌿 Identified Specimen
           </motion.span>
           <motion.h3
             className="result-plant-name"
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.28 }}
           >
             {prediction.plant_name}
           </motion.h3>
@@ -324,112 +310,107 @@ function ResultCard({ result }) {
             className="result-scientific"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
+            transition={{ delay: 0.36 }}
           >
             <em>{plant_info.scientific_name}</em> · {plant_info.family}
           </motion.p>
         </div>
 
         <motion.div
-          className="confidence-circle"
-          style={{ '--c': confidenceColor }}
+          className={`confidence-badge ${confidenceClass}`}
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.4, type: 'spring', stiffness: 180 }}
+          transition={{ delay: 0.35, type: 'spring', stiffness: 200 }}
         >
-          <svg className="circle-svg" viewBox="0 0 80 80">
-            <circle cx="40" cy="40" r="34" className="circle-track" />
-            <motion.circle
-              cx="40" cy="40" r="34"
-              className="circle-fill"
-              stroke={confidenceColor}
-              strokeDasharray={`${2 * Math.PI * 34}`}
-              initial={{ strokeDashoffset: 2 * Math.PI * 34 }}
-              animate={{ strokeDashoffset: 2 * Math.PI * 34 * (1 - prediction.confidence / 100) }}
-              transition={{ delay: 0.5, duration: 1, ease: [0.4, 0, 0.2, 1] }}
-            />
-          </svg>
-          <div className="circle-text">
-            <span className="circle-value">{prediction.confidence.toFixed(0)}%</span>
-            <span className="circle-label">conf.</span>
-          </div>
+          <span className="confidence-value">{prediction.confidence.toFixed(0)}%</span>
+          <span className="confidence-label">match</span>
         </motion.div>
       </div>
 
-      {/* ── Inference Stats ── */}
+      {/* ── Quick Stats ── */}
       <motion.div
-        className="inference-stats"
+        className="quick-stats"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
+        transition={{ delay: 0.45 }}
       >
         {[
-          { label: 'INFERENCE', value: `${inference_time_ms}ms` },
-          { label: 'IMAGE', value: image_info.dimensions },
-          { label: 'FILE', value: `${image_info.size_kb}KB` },
-          { label: 'HABITAT', value: plant_info.habitat.split(',')[0] },
-        ].map((stat, i) => (
-          <div key={stat.label} className="i-stat">
-            <span className="i-stat-label mono">{stat.label}</span>
-            <span className="i-stat-value">{stat.value}</span>
+          { label: 'Inference', value: `${inference_time_ms}ms` },
+          { label: 'Image', value: image_info.dimensions },
+          { label: 'File', value: `${image_info.size_kb}KB` },
+          { label: 'Habitat', value: plant_info.habitat.split(',')[0] },
+        ].map((s) => (
+          <div key={s.label} className="q-stat">
+            <span className="q-stat-label">{s.label}</span>
+            <span className="q-stat-value">{s.value}</span>
           </div>
         ))}
       </motion.div>
 
-      {/* ── Top 3 Predictions ── */}
+      {/* ── Top Predictions ── */}
       <motion.div
         className="predictions-section"
-        initial={{ opacity: 0, y: 10 }}
+        initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.55 }}
+        transition={{ delay: 0.5 }}
       >
-        <h4 className="section-label">TOP PREDICTIONS</h4>
+        <h4 className="section-head">
+          <span className="section-icon">🎯</span>
+          Top Predictions
+        </h4>
         {top_3_predictions.map((pred, i) => (
           <ConfidenceBar
             key={pred.plant_name}
             label={pred.plant_name}
             value={pred.confidence}
-            delay={0.6 + i * 0.1}
-            color={i === 0 ? 'linear-gradient(90deg, #00e5c3, #39ff8a)' : i === 1 ? 'rgba(0,229,195,0.6)' : 'rgba(0,229,195,0.35)'}
+            rank={i}
           />
         ))}
       </motion.div>
 
-      {/* ── Description ── */}
+      {/* ── About Plant ── */}
       <motion.div
-        className="plant-description"
-        initial={{ opacity: 0, y: 10 }}
+        initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7 }}
+        transition={{ delay: 0.6 }}
       >
-        <h4 className="section-label">ABOUT THIS PLANT</h4>
+        <h4 className="section-head">
+          <span className="section-icon">📖</span>
+          About This Plant
+        </h4>
         <p className="desc-text">{plant_info.description}</p>
-        <div className="plant-meta">
-          <span className="meta-item">
-            <span className="meta-label">Parts Used</span>
-            <span className="meta-value">{plant_info.parts_used}</span>
-          </span>
+        <div className="plant-meta-row">
+          <div className="meta-chip">
+            <span className="meta-chip-label">Parts Used</span>
+            <span className="meta-chip-value">{plant_info.parts_used}</span>
+          </div>
+          <div className="meta-chip">
+            <span className="meta-chip-label">Habitat</span>
+            <span className="meta-chip-value">{plant_info.habitat.split(',')[0]}</span>
+          </div>
         </div>
       </motion.div>
 
       {/* ── Medicinal Uses ── */}
       <motion.div
-        className="medicinal-uses"
-        initial={{ opacity: 0, y: 10 }}
+        initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8 }}
+        transition={{ delay: 0.7 }}
       >
-        <h4 className="section-label">MEDICINAL USES</h4>
+        <h4 className="section-head">
+          <span className="section-icon">🌿</span>
+          Medicinal Uses
+        </h4>
         <div className="uses-grid">
           {plant_info.medicinal_uses.map((use, i) => (
             <motion.div
               key={i}
               className="use-item"
-              initial={{ opacity: 0, x: -10 }}
+              initial={{ opacity: 0, x: -8 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.9 + i * 0.08 }}
+              transition={{ delay: 0.75 + i * 0.07 }}
             >
-              <span className="use-icon">✦</span>
+              <span className="use-bullet">🌱</span>
               <span className="use-text">{use}</span>
             </motion.div>
           ))}
@@ -441,42 +422,33 @@ function ResultCard({ result }) {
         className="disclaimer"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
+        transition={{ delay: 1.1 }}
       >
-        ⚠️ For educational purposes only. Consult a qualified practitioner before use.
+        ⚠️ For educational purposes only. Always consult a qualified healthcare
+        practitioner before using any medicinal plant.
       </motion.p>
     </motion.div>
   )
 }
 
-// ─── Rejection Card (not a plant image) ──────────────────────────────────────
+// ─── Rejection Card ───────────────────────────────────────────────────────────
 function RejectionCard({ data, onRetry }) {
   const { rejection_reason, rejection_detail, confidence, entropy_ratio } = data
   return (
     <motion.div
       className="rejection-card"
-      initial={{ opacity: 0, scale: 0.95, y: 20 }}
-      animate={{ opacity: 1, scale: 1,   y: 0  }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ type: 'spring', stiffness: 180 }}
+      initial={{ opacity: 0, scale: 0.96, y: 16 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.96 }}
+      transition={{ type: 'spring', stiffness: 200 }}
     >
-      <motion.div
-        className="rejection-icon"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.15, type: 'spring', stiffness: 200 }}
-      >
-        <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-          <circle cx="22" cy="22" r="20" stroke="#ff6b35" strokeWidth="1.5" />
-          <path d="M14 14 L30 30 M30 14 L14 30" stroke="#ff6b35" strokeWidth="2.5" strokeLinecap="round" />
-        </svg>
-      </motion.div>
+      <div className="rejection-icon">🍂</div>
 
       <motion.h3
         className="rejection-title"
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
+        transition={{ delay: 0.15 }}
       >
         Not a Medicinal Plant
       </motion.h3>
@@ -485,7 +457,7 @@ function RejectionCard({ data, onRetry }) {
         className="rejection-reason"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
+        transition={{ delay: 0.22 }}
       >
         {rejection_reason}
       </motion.p>
@@ -494,47 +466,32 @@ function RejectionCard({ data, onRetry }) {
         className="rejection-stats"
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
+        transition={{ delay: 0.3 }}
       >
         <div className="rej-stat">
-          <span className="rej-stat-label mono">CONFIDENCE</span>
-          <span className="rej-stat-value" style={{ color: '#ff6b35' }}>
-            {confidence?.toFixed(1)}%
-          </span>
+          <span className="rej-stat-label">Confidence</span>
+          <span className="rej-stat-value">{confidence?.toFixed(1)}%</span>
         </div>
         <div className="rej-stat">
-          <span className="rej-stat-label mono">ENTROPY</span>
-          <span className="rej-stat-value" style={{ color: '#ff6b35' }}>
-            {entropy_ratio?.toFixed(3)}
-          </span>
+          <span className="rej-stat-label">Entropy</span>
+          <span className="rej-stat-value">{entropy_ratio?.toFixed(3)}</span>
         </div>
         <div className="rej-stat">
-          <span className="rej-stat-label mono">VERDICT</span>
-          <span className="rej-stat-value" style={{ color: '#ff6b35' }}>Rejected</span>
+          <span className="rej-stat-label">Verdict</span>
+          <span className="rej-stat-value">Rejected</span>
         </div>
       </motion.div>
-
-      {rejection_detail && (
-        <motion.p
-          className="rejection-detail mono"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-        >
-          {rejection_detail}
-        </motion.p>
-      )}
 
       <motion.div
         className="rejection-tips"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
+        transition={{ delay: 0.42 }}
       >
         <p className="tips-title">For best results, upload:</p>
         <ul className="tips-list">
           <li>A clear photo of a single plant or leaf</li>
-          <li>Good lighting with the plant in focus</li>
+          <li>Good natural lighting with the plant in focus</li>
           <li>One of the 40+ supported medicinal plant species</li>
         </ul>
       </motion.div>
@@ -546,43 +503,37 @@ function RejectionCard({ data, onRetry }) {
         whileTap={{ scale: 0.97 }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.7 }}
+        transition={{ delay: 0.55 }}
       >
-        Try Another Image
+        🌿 Try Another Image
       </motion.button>
     </motion.div>
   )
 }
 
-// ─── Error Card (API/network errors) ─────────────────────────────────────────
+// ─── Error Card ───────────────────────────────────────────────────────────────
 function ErrorCard({ message, onRetry }) {
   return (
     <motion.div
       className="error-card"
-      initial={{ opacity: 0, scale: 0.95 }}
+      initial={{ opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
+      exit={{ opacity: 0, scale: 0.96 }}
     >
-      <div className="error-icon">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <circle cx="16" cy="16" r="14" stroke="#ff3d6e" strokeWidth="1.5" />
-          <path d="M16 9 L16 18" stroke="#ff3d6e" strokeWidth="2.5" strokeLinecap="round" />
-          <circle cx="16" cy="23" r="1.5" fill="#ff3d6e" />
-        </svg>
-      </div>
+      <div className="error-icon">🥀</div>
       <h3 className="error-title">Analysis Failed</h3>
       <p className="error-message">{message}</p>
-      <button className="retry-btn" onClick={onRetry}>Try Again</button>
+      <button className="retry-btn" onClick={onRetry}>🌱 Try Again</button>
     </motion.div>
   )
 }
 
 // ─── Main App ─────────────────────────────────────────────────────────────────
 export default function App() {
-  const [isLoading,  setIsLoading]  = useState(false)
-  const [result,     setResult]     = useState(null)      // plant result
-  const [rejection,  setRejection]  = useState(null)      // rejected (not a plant)
-  const [error,      setError]      = useState(null)      // network/API error
+  const [isLoading, setIsLoading] = useState(false)
+  const [result, setResult]       = useState(null)
+  const [rejection, setRejection] = useState(null)
+  const [error, setError]         = useState(null)
   const resultRef = useRef(null)
 
   const handleImageSelect = useCallback(async (file) => {
@@ -602,7 +553,6 @@ export default function App() {
 
       const data = response.data
 
-      // Route response: plant vs rejected vs error
       if (data.is_plant === false) {
         setRejection(data)
       } else {
@@ -614,12 +564,13 @@ export default function App() {
       }, 200)
 
     } catch (err) {
-      const msg = err.response?.data?.detail
-        || (err.code === 'ECONNREFUSED'
-          ? 'Cannot connect to the API server. Make sure the backend is running on port 8000.'
-          : null)
-        || err.message
-        || 'Something went wrong. Please try again.'
+      const msg =
+        err.response?.data?.detail ||
+        (err.code === 'ECONNREFUSED'
+          ? 'Cannot connect to the API server.'
+          : null) ||
+        err.message ||
+        'Something went wrong. Please try again.'
       setError(msg)
     } finally {
       setIsLoading(false)
@@ -634,7 +585,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <ParticleField />
+      <LeafField />
       <Header />
 
       <main className="main-content">
@@ -651,12 +602,10 @@ export default function App() {
                 <ErrorCard key="error" message={error} onRetry={handleReset} />
               )}
 
-              {/* ── NOT A PLANT — show rejection card ── */}
               {rejection && !isLoading && (
                 <RejectionCard key="rejection" data={rejection} onRetry={handleReset} />
               )}
 
-              {/* ── IS A PLANT — show full result ── */}
               {result && !isLoading && (
                 <ResultCard key="result" result={result} />
               )}
@@ -669,14 +618,26 @@ export default function App() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
-                  <div className="empty-deco">
-                    {[...Array(3)].map((_, i) => (
-                      <div key={i} className="deco-ring" style={{ '--i': i }} />
+                  <div className="empty-illustration">
+                    {[
+                      { emoji: '🌿', d: '4s', delay: '0s' },
+                      { emoji: '🍃', d: '5s', delay: '0.5s' },
+                      { emoji: '🌱', d: '3.5s', delay: '1s' },
+                    ].map((leaf, i) => (
+                      <span
+                        key={i}
+                        className="empty-leaf"
+                        style={{ '--d': leaf.d, '--delay': leaf.delay }}
+                      >
+                        {leaf.emoji}
+                      </span>
                     ))}
-                    <div className="empty-icon">🌿</div>
                   </div>
                   <p className="empty-title">Upload a plant image to begin</p>
-                  <p className="empty-sub">Our AI will identify the plant and reveal its medicinal properties</p>
+                  <p className="empty-sub">
+                    Our AI will identify the plant and reveal its medicinal
+                    properties, scientific name, and traditional uses.
+                  </p>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -685,9 +646,16 @@ export default function App() {
       </main>
 
       <footer className="footer">
-        <p className="footer-text mono">
-          PhytoScan AI · MobileNetV2 · TensorFlow · Built with ❤️ for medicinal plant research
-        </p>
+        <div className="footer-inner">
+          <span className="footer-logo">🌿 PhytoScan AI</span>
+          <p className="footer-text">
+            MobileNetV2 · TensorFlow · Built for medicinal plant research
+          </p>
+          <p className="footer-disclaimer">
+            For educational purposes only. Not a substitute for professional
+            medical advice. Always consult a qualified practitioner.
+          </p>
+        </div>
       </footer>
     </div>
   )
