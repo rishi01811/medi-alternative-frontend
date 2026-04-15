@@ -7,7 +7,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://localhost:8000',
+        target: 'https://rishi01811-phytoscan-backend.hf.space',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
