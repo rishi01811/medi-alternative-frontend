@@ -1,4 +1,10 @@
 {
   "buildCommand": "npx vite build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://rishi01811-phytoscan-backend.hf.space/:path*"
+    }
+  ]
 }
